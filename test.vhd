@@ -1,18 +1,26 @@
+-- estudo baseado no site https://balbertini.github.io/
 -- testando vhdl
 -- data: 02/09/2024
 
 -- Libraries
 
 -- Entity
-entity test is
+entity mux2to1 is
     port(
-        a   :   in bit;
-        b   :   out bit
+        s:  in bit; --selector
+        a, b: in bit_vector(1 downto 0); -- inputs of 2 bits
+        o: out bit_vector(1 downto 0) -- output of 2 bits
     );
-end entity;
+end mux2to1;
 
 -- Architecture
-architecture main of test is
+architecture whenelse of mux2to1 is
 begin
-    b <= a+1;
-end architecture main;
+    o <= b when s='1' else a;
+end whenelse;
+
+architecture struct of mux2to1 is
+begin
+    o(0) <= (a(0) and not(s)) or (b(0) and s);
+    o(1) <= (a(1) and not(s)) or (b(1) and s);
+end struct;
