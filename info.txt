@@ -1,0 +1,32 @@
+## Project's Information Text ##
+
+-----------------------------------------------------------------------
+FPGA KEY-CODE
+    *KEYS*
+        SW3 | SW2 | SW1 | SW0
+        T9  | U8  | U10 | V8
+    
+    *LEDS*
+        LD7 | LD6 | LD5 | LD4 | LD3 | LD2 | LD1 | LD0
+        W21 | Y22 | V20 | V19 | U19 | U20 | T19 | R20
+
+    *CLOCK*
+        BTN3 ~> T15
+
+-----------------------------------------------------------------------
+OPERATION CLASSIFICATION
+    1. Inversão ~>             0001 - 1 var
+    2. Soma ~>                 0010 - 2 var
+    3. Subtração (A-B) ~>      0011 - 2 var
+    4. Shift (Multi. por 2) ~> 0100 - 1 var
+    5. Complem. de 2 ~>        0101 - 1 var
+    6. Maior que ~>            0110 - 2 var
+    7. Menor que ~>            0111 - 2 var
+    8. Paridade ~>             1000 - 1 var
+
+-----------------------------------------------------------------------
+STATE CLASSIFICATION
+    Get operation ~>    00
+    Get variable 1 ~>   01
+    get variable 2 ~>   10
+    Clear ~>            11
