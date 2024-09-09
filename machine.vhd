@@ -5,7 +5,10 @@ entity machine is
         keys    : in bit_vector (3 downto 0);
         clock   :   in bit;
         leds  :   out bit_vector (3 downto 0);
-        extra   :   out bit_vector (7 downto 4)
+        flag_zero   :   out bit;
+        flag_sign   :   out bit;
+        flag_overf  :   out bit;
+        flag_cout   :   out bit
     );
 end entity;
 
@@ -28,8 +31,27 @@ architecture main of machine is
         elsif state = "01" then
             val1 <= keys;
             --dealing with exceptions
-            if operation = ("0001" or "0100" or "0101" or "1000") then 
+            if (operation = "0001") or (operation = "0100") or (operation = "0101") or (operation = "1000") then 
                 --One value only operation execution
+                case operation is
+                    when "0001" =>
+                        val1 <= not val1;
+                        if val1 = "0000" then flag_zero = '1'; end if;
+                        leds <= val1;
+                        --????? negative????
+                    
+                    when "0100" =>
+                        if val1(3) = '0' then
+                            flag_overf <= '1';
+                        elsif val1(3) = '1' then
+                            flag_cout <= '1';
+                        end if;
+                        val1 <= val1 + 2;
+                        leds <= val1;
+                        if val1 = "0000" then 
+                            flag_zero <= '1';
+                        end if;
+                end case;
                 state <= "11";
             else state <= "10";
             end if;
