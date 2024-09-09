@@ -14,7 +14,7 @@ architecture Behavioral of paridade is
   variable count2: INTEGER := 0;
   begin
        for i in 0 to 3 loop
-         if	bit_vector(i) => '1' then count2:= count2 + 1;
+         if	bit_vector(i) = '1' then count2:= count2 + 1;
   		end if;            
   end loop;  
   count <= count2;
