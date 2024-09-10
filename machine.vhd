@@ -20,6 +20,8 @@ architecture main of machine is
         signal operation: bit_vector(3 downto 0) := "0000";
         signal val1: bit_vector(3 downto 0) := "0000";
         signal val2: bit_vector(3 downto 0) := "0000";
+        signal trash_4: bit_vector(4 downto 0) := "0000";
+        signal trash_5: bit_vector(4 downto 0) := "00000";
 
         wait until clock'event and clock='1';
         --Input operation
@@ -34,12 +36,15 @@ architecture main of machine is
             if (operation = "0001") or (operation = "0100") or (operation = "0101") or (operation = "1000") then 
                 --One value only operation execution
                 case operation is
+
+                    --inverter
                     when "0001" =>
                         val1 <= not val1;
                         if val1 = "0000" then flag_zero = '1'; end if;
                         leds <= val1;
                         --????? negative????
                     
+                    --shift
                     when "0100" =>
                         if val1(3) = '0' then
                             flag_overf <= '1';
@@ -61,16 +66,39 @@ architecture main of machine is
             val2 <= keys;
             state <= '11';
             case operation is
+
+                -- Addition
                 when "0010" =>
-                    leds <= val1 + val2;
-                    if val1 > "0100" and val2 > "0100" then
+                    trash_5 <= val1 + val2; -- completar as val com 0 no mais significativo
+                    if trash_5(4) = '1' then
                         flag_cout <= '1';
+                        flag_sign <= '1';
+                    end if;
+                    trash_5(4) <= '0';
+                    trash(5) <= (not trash_5) + "00001"
+                    trash_4 <= trash_5(3 downto 0);
+                    if trash_5(4) = '1' then
+                        flag_overf <= '1';
+                    end if;
+                    leds <= trash_4;
+                
+                -- Subtraction
+                when "0011" =>
+                
+                -- Greater
+                when "0110" =>
+                    if (val1 > val2) then
+                        leds <= val1;
+                    else
+                        leds <= val2;
                     end if;
                 
-                when "0011" =>
-                    leds <= val1 - val2;
-                    if val1 > val2 then
-                        flag_sign <= '1';
+                -- Smaller
+                when "0111" =>
+                    if (val1 < val2) then
+                        leds <= val1;
+                    else
+                        leds <= val2;
                     end if;
             end case;
         

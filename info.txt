@@ -7,8 +7,12 @@ FPGA KEY-CODE
         T9  | U8  | U10 | V8
     
     *LEDS*
-        LD7 | LD6 | LD5 | LD4 | LD3 | LD2 | LD1 | LD0
-        W21 | Y22 | V20 | V19 | U19 | U20 | T19 | R20
+        LD3 | LD2 | LD1 | LD0
+        U19 | U20 | T19 | R20
+
+    *FLAGS*
+        LD7 | LD6 | LD5 | LD4
+        W21 | Y22 | V20 | V19 
 
     *CLOCK*
         BTN3 ~> T15
