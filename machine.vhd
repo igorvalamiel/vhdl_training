@@ -60,10 +60,19 @@ architecture main of machine is
         elsif state = "10" then
             val2 <= keys;
             state <= '11';
-            leds <= val1 + val2;
-            if val1 > "0100" and val2 > "0100" then
-                flag_cout <= '1';
-            end if;
+            case operation is
+                when "0010" =>
+                    leds <= val1 + val2;
+                    if val1 > "0100" and val2 > "0100" then
+                        flag_cout <= '1';
+                    end if;
+                
+                when "0011" =>
+                    leds <= val1 - val2;
+                    if val1 > val2 then
+                        flag_sign <= '1';
+                    end if;
+            end case;
         
         --clear state
         else
