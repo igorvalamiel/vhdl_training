@@ -60,6 +60,10 @@ architecture main of machine is
         elsif state = "10" then
             val2 <= keys;
             state <= '11';
+            leds <= val1 + val2;
+            if val1 > "0100" and val2 > "0100" then
+                flag_cout <= '1';
+            end if;
         
         --clear state
         else
