@@ -5,7 +5,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 entity paridade is
     Port (
         keys  : in bit_vector (3 downto 0);
-      	count 	: 	out INTEGER;
+      	count 	: 	out BITVECTOR (3 downto 0);
     );
 end paridade;
 
