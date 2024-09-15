@@ -46,8 +46,8 @@ architecture main of machine is
         signal operation: std_logic_vector(3 downto 0) := "0000";
         signal val1: std_logic_vector(3 downto 0) := "0000";
         signal val2: std_logic_vector(3 downto 0) := "0000";
-		signal num1: integer;
-        signal count: integer = '0';
+	    signal num1: integer;
+        signal count: integer := 0;
 begin	 
 	 
 	 process (clock)
@@ -81,7 +81,6 @@ begin
                         flag_zero <= '1';
                     end if;
                     state <= "11";
-                end if;
 
                 --comp. de 2
                 elsif operation = "0101" then
@@ -92,16 +91,19 @@ begin
                         val1 <= not val1;
                         val1 <= std_logic_vector(unsigned(val1) + 1);
                     state <= "11";
+			        end if;
 
                 --Paridade
-                elsif operation == "1000" then
+                elsif operation = "1000" then
                     for i in 0 to 3 loop
                         if val1(i) = '1' then count <= count + 1;
                         end if;
                     end loop;
-                    leds <= std_logic_vector(count);
+                    leds <= std_logic_vector(to_unsigned(count, 4));
                     state <= "11";
-                else state <= "10"; 
+                
+                --more than one value operation
+                else state <= "10";
                 end if;
 
             
@@ -113,17 +115,17 @@ begin
                 -- Addition
                 -- OBS: o número do input já esta em complento de dois, logo eu tenho que trasnformar ele de volta ou é só somar??? -> perguntar p pedro
                 if operation = "0010" then
-                    num1 <= unsigned(val1) + unsigned(val2);
+                    num1 <= to_integer(val1) + to_integer(val2);
                     if num1 > 15 or num1 < -15 then
                         flag_overf = '1';
                         flag_cout = '1';
                         leds <= "1111";
                     else leds <= std_logic_vector(num1);
                     end if;
-                    if num < 0 then
-                        flag_sign = '1';
-                    elsif num = 0 then
-                        flag_zero = '1';
+                    if num11 < '0' then
+                        flag_sign <= '1';
+                    elsif num1 = '0' then
+                        flag_zero <= '1';
                     end if;
                 
                 -- Subtraction
@@ -135,12 +137,11 @@ begin
                         leds <= "1111";
                     else leds <= std_logic_vector(num1);
                     end if;
-                    if num < 0 then
-                        flag_sign = '1';
-                    elsif num = 0 then
-                        flag_zero = '1';
+                    if num1 < '0' then
+                        flag_sign <= '1';
+                    elsif num1 = '0' then
+                        flag_zero <= '1';
                     end if;
-                    
                 
                 -- Greater
                 elsif operation = "0110" then
