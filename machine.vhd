@@ -32,11 +32,11 @@ use IEEE.NUMERIC_STD.ALL;
 entity machine is
     Port ( keys : in  std_logic_vector (3 downto 0);
            leds : out  std_logic_vector (3 downto 0);
-           clock : in  bit;
-           flag_zero : out  bit;
-           flag_sign : out  bit;
-           flag_overf : out  bit;
-           flag_cout : out  bit);
+           clock : in  std_logic;
+           flag_zero : out  std_logic;
+           flag_sign : out  std_logic;
+           flag_overf : out  std_logic;
+           flag_cout : out  std_logic);
 end machine;
 
 architecture main of machine is
@@ -46,8 +46,14 @@ architecture main of machine is
         signal operation: std_logic_vector(3 downto 0) := "0000";
         signal val1: std_logic_vector(3 downto 0) := "0000";
         signal val2: std_logic_vector(3 downto 0) := "0000";
-	    signal num1: integer;
         signal count: integer := 0;
+        signal c0: std_logic;
+        signal c1: std_logic;
+        signal c2: std_logic;
+        signal c3: std_logic;
+        signal fiveb: std_logic_vector(4 downto 0);
+        signal fourb: std_logic_vector(3 downto 0);
+	
 begin	 
 	 
 	 process (clock)
@@ -113,35 +119,26 @@ begin
             state <= "11";
 
                 -- Addition
-                -- OBS: o número do input já esta em complento de dois, logo eu tenho que trasnformar ele de volta ou é só somar??? -> perguntar p pedro
                 if operation = "0010" then
-                    num1 <= to_integer(val1) + to_integer(val2);
-                    if num1 > 15 or num1 < -15 then
-                        flag_overf = '1';
-                        flag_cout = '1';
-                        leds <= "1111";
-                    else leds <= std_logic_vector(num1);
-                    end if;
-                    if num11 < '0' then
-                        flag_sign <= '1';
-                    elsif num1 = '0' then
-                        flag_zero <= '1';
-                    end if;
+                    c0 <= val1(0) and val2(0);
+                    fourb(0) <= (val1(0) xor val2(0));
+                    c1 <= (c0 and val1(1)) or (c0 and val2(1)) or (val1(1) and val2(1));
+                    fourb(1) <= (c0 xor val1(1) xor val2(1));
+                    c2 <= (c1 and val1(2)) or (c1 and val2(2)) or (val1(2) and val2(2));
+                    fourb(2) <= (c1 xor val1(2) xor val2(2));
+                    c3 <= (c2 and val1(3)) or (c2 and val2(3)) or (val1(3) and val2(3));
+                    fourb(3) <= (c2 xor val1(3) xor val2(3));
+                    fiveb <= val1 and val2;
+
+                    flag_overf <= c3;
+                    flag_sign <= fiveb(3);
+                    flag_cout <= fiveb(4);
+                    if fiveb(3 downto 0) = "0000" then flag_zero <= '1'; end if;
+
+                    leds <= fiveb(3 downto 0);
                 
                 -- Subtraction
-                elsif operation = "0011" then
-                    num1 <= unsigned(val1) - unsigned(val2);
-                    if num1 > 15 or num1 < -15 then
-                        flag_overf = '1';
-                        flag_cout = '1';
-                        leds <= "1111";
-                    else leds <= std_logic_vector(num1);
-                    end if;
-                    if num1 < '0' then
-                        flag_sign <= '1';
-                    elsif num1 = '0' then
-                        flag_zero <= '1';
-                    end if;
+                --elsif operation = "0011" then
                 
                 -- Greater
                 elsif operation = "0110" then

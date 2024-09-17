@@ -34,3 +34,23 @@ STATE CLASSIFICATION
     Get variable 1 ~>   01
     get variable 2 ~>   10
     Clear ~>            11
+
+-----------------------------------------------------------------------
+TRUTH TABLE FOR SUM
+
+A -> Carry (i)
+B -> number1 (i)
+C -> number2 (i)
+
+ABC | Cout | S
+000 |  0   | 0
+001 |  0   | 1
+010 |  0   | 1
+011 |  1   | 0
+100 |  0   | 1
+101 |  1   | 0
+110 |  1   | 0
+111 |  1   | 1
+
+Cout -> AB + AC + BC
+S -> A xor B xor C
