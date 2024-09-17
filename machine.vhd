@@ -95,7 +95,7 @@ begin
                         flag_zero <= '1';
                     else
                         val1 <= not val1;
-                        val1 <= std_logic_vector(unsigned(val1) + 1);
+                        val1 <= std_logic_vector(signed(val1) + 1);
                     state <= "11";
 			        end if;
 
@@ -128,7 +128,7 @@ begin
                     fourb(2) <= (c1 xor val1(2) xor val2(2));
                     c3 <= (c2 and val1(3)) or (c2 and val2(3)) or (val1(3) and val2(3));
                     fourb(3) <= (c2 xor val1(3) xor val2(3));
-                    fiveb <= val1 and val2;
+                    fiveb <= std_logic_vector(signed(val1) + signed(val2));
 
                     flag_overf <= c3;
                     flag_sign <= fiveb(3);
@@ -138,7 +138,25 @@ begin
                     leds <= fiveb(3 downto 0);
                 
                 -- Subtraction
-                --elsif operation = "0011" then
+                elsif operation = "0011" then
+                    val2 <= std_logic_vector(signed(not val2) + 1);
+
+                    c0 <= val1(0) and val2(0);
+                    fourb(0) <= (val1(0) xor val2(0));
+                    c1 <= (c0 and val1(1)) or (c0 and val2(1)) or (val1(1) and val2(1));
+                    fourb(1) <= (c0 xor val1(1) xor val2(1));
+                    c2 <= (c1 and val1(2)) or (c1 and val2(2)) or (val1(2) and val2(2));
+                    fourb(2) <= (c1 xor val1(2) xor val2(2));
+                    c3 <= (c2 and val1(3)) or (c2 and val2(3)) or (val1(3) and val2(3));
+                    fourb(3) <= (c2 xor val1(3) xor val2(3));
+                    fiveb <= std_logic_vector(signed(val1) - signed(val2));
+
+                    flag_overf <= c3;
+                    flag_sign <= fiveb(3);
+                    flag_cout <= fiveb(4);
+                    if fiveb(3 downto 0) = "0000" then flag_zero <= '1'; end if;
+
+                    leds <= fiveb(3 downto 0);
                 
                 -- Greater
                 elsif operation = "0110" then
