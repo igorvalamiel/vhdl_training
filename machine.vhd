@@ -42,7 +42,7 @@ end machine;
 architecture main of machine is
 	 
 	 -- declaring variables
-        signal state: std_logic_vector(1 downto 0) := "00";
+        signal state: std_logic_vector(1 downto 0) := "11";
         signal operation: std_logic_vector(3 downto 0) := "0000";
         signal val1: std_logic_vector(3 downto 0) := "0000";
         signal val2: std_logic_vector(3 downto 0) := "0000";
@@ -53,10 +53,23 @@ architecture main of machine is
         signal c3: std_logic;
         signal fiveb: std_logic_vector(4 downto 0);
         signal fourb: std_logic_vector(3 downto 0);
+		  signal clock2 : std_logic := '0';
 	
 begin	 
 	 
-	 process (clock)
+	 process(clock)
+	 begin
+	 if clock = '1' then
+			
+		clock2 <= '1';
+		for i in 0 to 100 loop
+			end loop;
+		clock2 <= '0';
+		
+		end if;
+		end process;
+	 
+	 process(clock2)
 	 
     begin
         --Input operation
@@ -74,6 +87,7 @@ begin
                     if val1 = "0000" then flag_zero <= '1';
                     end if;
                     leds <= val1;
+						  state <= "11";
                 
                 --shift
                 elsif operation = "0100" then
@@ -86,7 +100,7 @@ begin
                     if val1 = "0000" then 
                         flag_zero <= '1';
                     end if;
-                    state <= "11";
+						  state <= "11";
 
                 --comp. de 2
                 elsif operation = "0101" then
@@ -96,8 +110,8 @@ begin
                     else
                         val1 <= not val1;
                         val1 <= std_logic_vector(signed(val1) + 1);
-                    state <= "11";
-			        end if;
+					     end if;
+						  state <= "11";
 
                 --Paridade
                 elsif operation = "1000" then
@@ -106,7 +120,7 @@ begin
                         end if;
                     end loop;
                     leds <= std_logic_vector(to_unsigned(count, 4));
-                    state <= "11";
+						  state <= "11";
                 
                 --more than one value operation
                 else state <= "10";
