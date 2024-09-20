@@ -53,13 +53,24 @@ architecture main of machine is
         signal c3: std_logic;
         signal fiveb: std_logic_vector(4 downto 0);
         signal fourb: std_logic_vector(3 downto 0);
+		  signal clock2 : std_logic := '0';
 	
 begin	 
 	 
     process(clock)
-	 
     begin
         if rising_edge(clock) then
+            clock2 <= '1';
+            for i in 0 to 100 loop
+                end loop;
+            clock2 <= '0';
+        end if;
+    end process;
+    
+    process(clock2)
+	 
+    begin
+        if rising_edge(clock2) then
             --Input operation
             if state = "00" then
                 operation <= keys;
