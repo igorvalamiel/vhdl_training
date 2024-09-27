@@ -4,7 +4,7 @@ use ieee.std_logic_1164.all;
 entity debounce is
   generic(
     clk_freq    : integer := 50_000_000;  --Determinando frequencia de clock em Hz
-    stable_time : integer := 10);         --Estabilizando o tempo (em ms)
+    stable_time : integer := 25);         --Estabilizando o tempo (em ms)
   port(
     clk     : in  std_logic;  --clock input
     reset_n : in  std_logic;  --reset
