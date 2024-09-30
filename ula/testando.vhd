@@ -29,7 +29,7 @@ use IEEE.NUMERIC_STD.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-entity ula is
+entity tst3 is
     Port (keys : in  std_logic_vector (3 downto 0);
         leds : out  std_logic_vector (3 downto 0);
         clock : in  std_logic;
@@ -38,16 +38,15 @@ entity ula is
         flag_sign : out  std_logic;
         flag_overf : out  std_logic;
         flag_cout : out  std_logic);
-end ula;
+end tst3;
 
-architecture main of ula is
+architecture main of tst3 is
     
     -- declaring variables
-        type mem_val is array (0 to 2) of std_logic_vector(3 downto 0);
-        signal operation := mem_val(0);
-        signal val1 := mem_val(1);
-        signal val2 := mem_val(2);
         signal state: std_logic_vector(1 downto 0) := "11";
+        signal operation: std_logic_vector(3 downto 0) := "0000";
+        signal val1: std_logic_vector(3 downto 0) := "0000";
+        signal val2: std_logic_vector(3 downto 0) := "0000";
         signal count: integer := 0;
         signal c0: std_logic;
         signal c1: std_logic;
@@ -56,21 +55,38 @@ architecture main of ula is
         signal fiveb: std_logic_vector(4 downto 0);
         signal fourb: std_logic_vector(3 downto 0);
         signal clock_out: std_logic;
+        signal reset_value: std_logic := '0';
+	signal op_keys: std_logic_vector(3 downto 0);
+        signal v1_keys: std_logic_vector(3 downto 0);
+        signal v2_keys: std_logic_vector(3 downto 0);
         
     component debounce is
-            generic(
-                clk_freq    : integer := 50_000_000;
-                stable_time : integer := 25);
+        generic(
+            clk_freq    : integer := 50_000_000;
+            stable_time : integer := 25);
         port(
             clk     : in  std_logic;
             reset_n : in  std_logic;
             button  : in  std_logic;
             result  : OUT std_logic);
     end component debounce;
-    
+
+    component ffmem is
+        port(
+            clk     : in  std_logic;
+            reset : in  std_logic;
+            state : in std_logic_vector (1 downto 0);
+            val  : in  std_logic_vector (3 downto 0);
+            result  : out std_logic_vector (3 downto 0)
+        );
+    end component ffmem;
+
 begin	 
     
-    dbc : debounce port map (glb_clock, '1', clock, clock_out); 
+    dbc : debounce port map (glb_clock, reset_value, clock, clock_out); 
+    ffop: ffmem port map(clock_out, reset_value, state, keys, op_keys);
+    ffv1: ffmem port map(clock_out, reset_value, state, keys, v1_keys);
+    ffv2: ffmem port map(clock_out, reset_value, state, keys, v2_keys);
     
     process(clock_out)
     
@@ -78,12 +94,13 @@ begin
         if rising_edge(clock_out) then
             --Input operation
             if state = "00" then
-                operation <= keys;
+                operation <= op_keys;
                 state <= "01";
+                reset_value <= '1';
 
             --Input value 1
             elsif state = "01" then
-                val1 <= keys;
+                val1 <= v1_keys;
                     --One value only operation execution
                     --inverter
                     if operation = "0001" then
@@ -133,7 +150,7 @@ begin
                 
             --Input value 2
             elsif state = "10" then
-                val2 <= keys;
+                val2 <= v2_keys;
                 state <= "11";
 
                     -- Addition
@@ -197,13 +214,11 @@ begin
             else
                 leds <= "0000";
                 state <= "00";
-                operation <= "0000";
+                reset_value <= '0';
                 flag_zero <= '0';
                 flag_sign <= '0';
                 flag_overf <= '0';
                 flag_cout <= '0';
-                val1 <= "0000";
-                val2 <= "0000";
             end if;
         end if;
     end process;
