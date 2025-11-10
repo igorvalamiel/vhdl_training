@@ -1,0 +1,3 @@
+vhdl work "../list_ch08_01_ps2_rx.vhd"
+vhdl work "../fifo.vhd"
+vhdl work "../list_ch08_03_kb_lcode.vhd"

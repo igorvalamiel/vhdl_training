@@ -1,0 +1,2 @@
+xst -intstyle ise -ifn "/home/sd/Downloads/my_BCD/base/kb_code.xst" -ofn "/home/sd/Downloads/my_BCD/base/kb_code.syr" 
+xst -intstyle ise -ifn "/home/sd/Desktop/baseSD2/base/kb_code.xst" -ofn "/home/sd/Desktop/baseSD2/base/kb_code.syr" 

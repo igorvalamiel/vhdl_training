@@ -1,0 +1,20 @@
+V3 12
+FL /home/sd/baseSD2/fifo.vhd 2024/11/28.14:12:52 P.20131013
+FL /home/sd/baseSD2/list_ch08_01_ps2_rx.vhd 2024/11/28.14:12:54 P.20131013
+FL /home/sd/baseSD2/list_ch08_03_kb_lcode.vhd 2024/11/28.14:12:48 P.20131013
+FL /home/sd/Desktop/baseSD2/fifo.vhd 2024/11/28.14:12:52 P.20131013
+EN work/fifo 1733157128 FL /home/sd/Desktop/baseSD2/fifo.vhd \
+      PB ieee/std_logic_1164 1381692176 PB ieee/NUMERIC_STD 1381692181
+AR work/fifo/arch 1733157129 \
+      FL /home/sd/Desktop/baseSD2/fifo.vhd EN work/fifo 1733157128
+FL /home/sd/Desktop/baseSD2/list_ch08_01_ps2_rx.vhd 2024/11/28.14:12:54 P.20131013
+EN work/ps2_rx 1733157126 FL /home/sd/Desktop/baseSD2/list_ch08_01_ps2_rx.vhd \
+      PB ieee/std_logic_1164 1381692176 PB ieee/NUMERIC_STD 1381692181
+AR work/ps2_rx/arch 1733157127 \
+      FL /home/sd/Desktop/baseSD2/list_ch08_01_ps2_rx.vhd EN work/ps2_rx 1733157126
+FL /home/sd/Desktop/baseSD2/list_ch08_03_kb_lcode.vhd 2024/11/28.14:12:48 P.20131013
+EN work/kb_code 1733157130 FL /home/sd/Desktop/baseSD2/list_ch08_03_kb_lcode.vhd \
+      PB ieee/std_logic_1164 1381692176 PB ieee/NUMERIC_STD 1381692181
+AR work/kb_code/arch 1733157131 \
+      FL /home/sd/Desktop/baseSD2/list_ch08_03_kb_lcode.vhd EN work/kb_code 1733157130 \
+      AR work/ps2_rx/arch 1733157127 AR work/fifo/arch 1733157129

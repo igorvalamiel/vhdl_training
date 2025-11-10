@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- IMPORTANT: This is an internal file that has been generated
+     by the Xilinx ISE software.  Any direct editing or
+     changes made to this file may result in unpredictable
+     behavior or data corruption.  It is strongly advised that
+     users do not edit the contents of this file. -->
+<messages>
+<msg type="warning" file="HDLParsers" num="3607" delta="new" >Unit <arg fmt="%s" index="1">work/kb_code</arg> is now defined in a different file.  It was defined in &quot;<arg fmt="%s" index="2">/home/sd/baseSD2/list_ch08_03_kb_lcode.vhd</arg>&quot;, and is now defined in &quot;<arg fmt="%s" index="3">/home/sd/Desktop/baseSD2/list_ch08_03_kb_lcode.vhd</arg>&quot;.
+</msg>
+
+<msg type="warning" file="HDLParsers" num="3607" delta="new" >Unit <arg fmt="%s" index="1">work/kb_code/arch</arg> is now defined in a different file.  It was defined in &quot;<arg fmt="%s" index="2">/home/sd/baseSD2/list_ch08_03_kb_lcode.vhd</arg>&quot;, and is now defined in &quot;<arg fmt="%s" index="3">/home/sd/Desktop/baseSD2/list_ch08_03_kb_lcode.vhd</arg>&quot;.
+</msg>
+
+<msg type="warning" file="HDLParsers" num="3607" delta="new" >Unit <arg fmt="%s" index="1">work/fifo</arg> is now defined in a different file.  It was defined in &quot;<arg fmt="%s" index="2">/home/sd/baseSD2/fifo.vhd</arg>&quot;, and is now defined in &quot;<arg fmt="%s" index="3">/home/sd/Desktop/baseSD2/fifo.vhd</arg>&quot;.
+</msg>
+
+<msg type="warning" file="HDLParsers" num="3607" delta="new" >Unit <arg fmt="%s" index="1">work/fifo/arch</arg> is now defined in a different file.  It was defined in &quot;<arg fmt="%s" index="2">/home/sd/baseSD2/fifo.vhd</arg>&quot;, and is now defined in &quot;<arg fmt="%s" index="3">/home/sd/Desktop/baseSD2/fifo.vhd</arg>&quot;.
+</msg>
+
+<msg type="warning" file="HDLParsers" num="3607" delta="new" >Unit <arg fmt="%s" index="1">work/ps2_rx</arg> is now defined in a different file.  It was defined in &quot;<arg fmt="%s" index="2">/home/sd/baseSD2/list_ch08_01_ps2_rx.vhd</arg>&quot;, and is now defined in &quot;<arg fmt="%s" index="3">/home/sd/Desktop/baseSD2/list_ch08_01_ps2_rx.vhd</arg>&quot;.
+</msg>
+
+<msg type="warning" file="HDLParsers" num="3607" delta="new" >Unit <arg fmt="%s" index="1">work/ps2_rx/arch</arg> is now defined in a different file.  It was defined in &quot;<arg fmt="%s" index="2">/home/sd/baseSD2/list_ch08_01_ps2_rx.vhd</arg>&quot;, and is now defined in &quot;<arg fmt="%s" index="3">/home/sd/Desktop/baseSD2/list_ch08_01_ps2_rx.vhd</arg>&quot;.
+</msg>
+
+<msg type="warning" file="Xst" num="753" delta="new" >&quot;<arg fmt="%s" index="1">/home/sd/Desktop/baseSD2/list_ch08_03_kb_lcode.vhd</arg>&quot; line <arg fmt="%d" index="2">34</arg>: Unconnected output port &apos;<arg fmt="%s" index="3">full</arg>&apos; of component &apos;<arg fmt="%s" index="4">fifo</arg>&apos;.
+</msg>
+
+<msg type="warning" file="Xst" num="646" delta="old" >Signal &lt;<arg fmt="%s" index="1">b_reg&lt;0&gt;</arg>&gt; is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1780" delta="old" >Signal &lt;<arg fmt="%s" index="1">w_data</arg>&gt; is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="old" >Node &lt;<arg fmt="%s" index="1">b_reg_0</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">ps2_rx_unit</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="old" >Node &lt;<arg fmt="%s" index="1">b_reg_0</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">ps2_rx</arg>&gt;.
+</msg>
+
+</messages>
+

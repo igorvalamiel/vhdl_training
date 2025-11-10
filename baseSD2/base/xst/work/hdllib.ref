@@ -1,0 +1,6 @@
+AR ps2_rx arch /home/sd/Desktop/baseSD2/list_ch08_01_ps2_rx.vhd sub00/vhpl01 1733157127
+AR kb_code arch /home/sd/Desktop/baseSD2/list_ch08_03_kb_lcode.vhd sub00/vhpl05 1733157131
+EN ps2_rx NULL /home/sd/Desktop/baseSD2/list_ch08_01_ps2_rx.vhd sub00/vhpl00 1733157126
+AR fifo arch /home/sd/Desktop/baseSD2/fifo.vhd sub00/vhpl03 1733157129
+EN kb_code NULL /home/sd/Desktop/baseSD2/list_ch08_03_kb_lcode.vhd sub00/vhpl04 1733157130
+EN fifo NULL /home/sd/Desktop/baseSD2/fifo.vhd sub00/vhpl02 1733157128
